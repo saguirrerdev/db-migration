@@ -1,11 +1,11 @@
 FROM python:3.9-slim
 
-WORKDIR /app
+WORKDIR /api
 
-COPY ./app /app
+COPY ./api /api
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 80
+EXPOSE 8000
 
-CMD ["python", "main.py"]
+CMD ["python", "app/main.py"]
