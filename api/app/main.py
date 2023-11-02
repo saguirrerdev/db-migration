@@ -1,7 +1,15 @@
 from fastapi import FastAPI
 from routers import departments, jobs, hired_employees
+from fastapi.responses import RedirectResponse
 
-app = FastAPI()
+app = FastAPI(
+    title="DB Migration API",
+    description="Migration API"
+)
+
+@app.get("/")
+def read_root():
+    return RedirectResponse("/docs")
 
 app.include_router(departments.router, prefix="/departments", tags=["departments"])   
 app.include_router(jobs.router, prefix="/jobs", tags=["jobs"])   
