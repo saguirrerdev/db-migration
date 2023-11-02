@@ -3,7 +3,7 @@ import json
 
 from botocore.exceptions import ClientError
 
-def get_secret(key_name=None) -> dict | None:
+def get_secret(key_name=None):
     if not key_name:
         return None
 
