@@ -32,9 +32,20 @@ async def upload_departments(file: UploadFile):
         )
   
 @router.get("/hires_by_quarter")
-async def hires_by_quarter():
+async def hires_by_quarter_2021():
     try:
         query = read_file("app/queries/employes_by_quarter.sql")
+        response = RedshiftConnection() \
+            .query(query) \
+            .fetch_json()
+        return response
+    except Exception as e:
+        raise Exception(e)
+
+@router.get("/over_mean_hires")
+async def over_mean_hires_2021():
+    try:
+        query = read_file("app/queries/department_hires.sql")
         response = RedshiftConnection() \
             .query(query) \
             .fetch_json()
