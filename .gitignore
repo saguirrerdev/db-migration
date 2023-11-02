@@ -15,3 +15,5 @@ terraform.log
 .terraform.lock.hcl
 
 .env
+
+docker-compose.yml

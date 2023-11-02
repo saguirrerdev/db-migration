@@ -1,6 +1,0 @@
-version: '3'
-services:
-  fastapi-app:
-    image: db-migration-api
-    ports:
-      - "80:8000"
