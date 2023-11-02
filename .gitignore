@@ -13,3 +13,5 @@ terraform.log
 .tfplan
 
 .terraform.lock.hcl
+
+.env
