@@ -7,9 +7,6 @@ class DB:
   
     def __init__(self):
         self.conn = None
-        self.host = os.getenv("DB_HOST")
-        self.port = os.getenv("DB_PORT")
-        self.dbname = os.getenv("DB_NAME")
         self.query_string = None
         self.connect()
 
@@ -26,7 +23,7 @@ class DB:
     def conn_string(self):
         secret_keys = secrets.get_secret(os.getenv("DB_SECRET_KEY_NAME"))
 
-        return f"mysql+mysqlconnector://{secret_keys['username']}:{secret_keys['password']}@{self.host}:{self.port}/{self.dbname}"
+        return f"mysql+mysqlconnector://{secret_keys['username']}:{secret_keys['password']}@{secret_keys['host']}:{secret_keys['port']}/{secret_keys['dbname']}"
     
     
     def query(self, query:str = ''):
