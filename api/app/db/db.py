@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from utils import secrets
 
 import os
@@ -33,3 +33,11 @@ class DB:
 
     def fetch_json(self):
       pass
+    
+    def callproc(self):
+        with self.conn.connect() as conn:
+            try:
+                conn.execute(text(self.query_string))
+                conn.commit()
+            except Exception as e:
+                raise e

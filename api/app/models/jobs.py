@@ -30,6 +30,7 @@ async def upload_jobs_csv(file: UploadFile):
       index=False
     )
 
+    DB().query("CALL load_jobs();").callproc()
   except Exception as e:
     raise e    
 

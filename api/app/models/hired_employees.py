@@ -31,6 +31,7 @@ async def upload_hired_employees_csv(file: UploadFile):
       index=False
     )
 
+    DB().query("CALL load_hired_employees();").callproc()
   except Exception as e:
     raise e    
 
@@ -67,7 +68,7 @@ def validate_csv_data(df: pd.DataFrame):
         status_code=status.HTTP_400_BAD_REQUEST
       )
   
-  if df.shape[0] > 2000:
+  if df.shape[0] > 1000:
     raise HTTPException(
       detail=f"Maxímun rows expected {MAX_ROWS_EXPECTED}, got {df.shape[0]}",
       status_code=status.HTTP_400_BAD_REQUEST

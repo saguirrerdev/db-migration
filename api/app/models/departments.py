@@ -27,6 +27,7 @@ async def upload_departments_csv(file: UploadFile):
       index=False
     )
 
+    DB().query("CALL load_departments();").callproc()
   except Exception as e:
     raise e    
 
