@@ -1,7 +1,5 @@
-resource "aws_ecr_repository" "ecr_repo" {
-  name = "${var.project}-ecr-repo"
+module "ecr" {
+  source = "./ecr"
 
-  tags = {
-    "project": var.project
-  }
+  project_name = var.project_name
 }
