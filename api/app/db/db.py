@@ -32,7 +32,12 @@ class DB:
         return self
 
     def fetch_json(self):
-      pass
+        with self.conn.connect() as conn:
+            try:              
+                results = conn.execute(text(self.query_string))
+                return results.mappings().all()
+            except Exception as e:
+                raise e
     
     def callproc(self):
         with self.conn.connect() as conn:

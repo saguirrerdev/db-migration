@@ -1,7 +1,4 @@
 from fastapi import APIRouter, UploadFile, HTTPException, status
-from utils.s3 import s3_upload
-from db.database import RedshiftConnection
-from utils.read_file import read_file
 from models import departments
 
 router = APIRouter()
@@ -15,12 +12,9 @@ async def upload_departments(file: UploadFile):
         raise e
   
 @router.get("/hires_by_quarter")
-async def hires_by_quarter_2021():
+def hires_by_quarter_2021():
     try:
-        query = read_file("app/queries/employes_by_quarter.sql")
-        response = RedshiftConnection() \
-            .query(query) \
-            .fetch_json()
+        response = departments.hires_by_quarter_2021()
         return response
     except Exception as e:
         return HTTPException(
@@ -29,12 +23,9 @@ async def hires_by_quarter_2021():
         )
 
 @router.get("/over_mean_hires")
-async def over_mean_hires_2021():
+def over_mean_hires_2021():
     try:
-        query = read_file("app/queries/department_hires.sql")
-        response = RedshiftConnection() \
-            .query(query) \
-            .fetch_json()
+        response = departments.over_mean_hires_2021()
         return response
     except Exception as e:
         return HTTPException(

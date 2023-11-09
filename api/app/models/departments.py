@@ -1,6 +1,7 @@
 from fastapi import UploadFile, HTTPException, status
 from db.db import DB
 from datetime import datetime
+from utils.read_file import read_file
 
 import pandas as pd
 import io
@@ -69,3 +70,29 @@ def validate_csv_data(df: pd.DataFrame):
       detail=f"Maxímun rows expected {MAX_ROWS_EXPECTED}, got {df.shape[0]}",
       status_code=status.HTTP_400_BAD_REQUEST
     )
+  
+def hires_by_quarter_2021():
+  try:
+    query = read_file("app/queries/employes_by_quarter.sql")
+    response = DB() \
+        .query(query) \
+        .fetch_json()
+    return response
+  except Exception as e:
+      raise HTTPException(
+          status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+          detail=e
+      )
+  
+def over_mean_hires_2021():
+  try:
+      query = read_file("app/queries/department_hires.sql")
+      response = DB() \
+          .query(query) \
+          .fetch_json()
+      return response
+  except Exception as e:
+      raise HTTPException(
+          status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+          detail=e
+      )
