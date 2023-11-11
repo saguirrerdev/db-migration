@@ -7,6 +7,7 @@ Also provides some analiticals as
 2. List of departments where the amount of hires are over the mean for all departments
 
 You can access to the API by this link [Migration API](http://db-migration-lb1-700957538.us-east-1.elb.amazonaws.com/)
+**Note: Service is down, make a request to my email to turn on the services**
 
 ### Tool stack
 * Fast API
